@@ -362,7 +362,7 @@ contract CommonReportTrigger is Governance {
         IVault.StrategyParams memory params = vault.strategies(_strategy);
 
         // Don't report if the strategy is not active or has no funds.
-        if (params.activation == 0 || params.current_debt == 0)
+        if (params.activation == 0 || params.currentDebt == 0)
             return (false, bytes("Not Active"));
 
         // Check if a `baseFeeProvider` is set.
@@ -384,9 +384,9 @@ contract CommonReportTrigger is Governance {
 
         return (
             // Return true is the full profit unlock time has passed since the last report.
-            block.timestamp - params.last_report > vault.profitMaxUnlockTime(),
+            block.timestamp - params.lastReport > vault.profitMaxUnlockTime(),
             // Return the function selector and the strategy as the parameter to use.
-            abi.encodeCall(vault.process_report, _strategy)
+            abi.encodeCall(vault.processReport, _strategy)
         );
     }
 

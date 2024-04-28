@@ -35,7 +35,10 @@ contract HookEvents {
 }
 
 contract MockHooks is BaseHooks, HookEvents {
-    constructor(address _asset) BaseHooks(_asset, "Hooked") {}
+    constructor(
+        address _tokenizedStrategyAddress,
+        address _asset
+    ) BaseHooks(_tokenizedStrategyAddress, _asset, "Hooked") {}
 
     function _preDepositHook(
         uint256 assets,

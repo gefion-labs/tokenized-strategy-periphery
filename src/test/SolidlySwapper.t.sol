@@ -29,7 +29,12 @@ contract SolidlySwapperTest is Setup {
         maxFuzzAmount = 2e21;
 
         solidlySwapper = IMockSolidlySwapper(
-            address(new MockSolidlySwapper(address(asset)))
+            address(
+                new MockSolidlySwapper(
+                    address(tokenizedStrategy),
+                    address(asset)
+                )
+            )
         );
 
         solidlySwapper.setKeeper(keeper);

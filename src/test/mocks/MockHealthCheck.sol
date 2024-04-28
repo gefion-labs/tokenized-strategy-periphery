@@ -6,7 +6,10 @@ import {BaseHealthCheck, ERC20} from "../../Bases/HealthCheck/BaseHealthCheck.so
 contract MockHealthCheck is BaseHealthCheck {
     bool public healthy = true;
 
-    constructor(address _asset) BaseHealthCheck(_asset, "Mock Health Check") {}
+    constructor(
+        address _tokenizedStrategyAddress,
+        address _asset
+    ) BaseHealthCheck(_tokenizedStrategyAddress, _asset, "Mock Health Check") {}
 
     function _deployFunds(uint256) internal override {}
 

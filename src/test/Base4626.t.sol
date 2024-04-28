@@ -18,6 +18,7 @@ contract Base4626CompounderTest is Setup {
         IStrategy _compounder = IStrategy(
             address(
                 new Base4626Compounder(
+                    address(tokenizedStrategy),
                     address(asset),
                     "Tokenized Strategy",
                     address(mockStrategy)

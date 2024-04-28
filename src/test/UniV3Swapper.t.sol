@@ -19,7 +19,12 @@ contract UniswapV3SwapperTest is Setup {
         weth = ERC20(tokenAddrs["WETH"]);
 
         uniV3Swapper = IMockUniswapV3Swapper(
-            address(new MockUniswapV3Swapper(address(asset)))
+            address(
+                new MockUniswapV3Swapper(
+                    address(tokenizedStrategy),
+                    address(asset)
+                )
+            )
         );
 
         uniV3Swapper.setKeeper(keeper);

@@ -14,7 +14,9 @@ contract HealthCheckTest is Setup {
         super.setUp();
 
         healthCheck = IMockHealthCheck(
-            address(new MockHealthCheck(address(asset)))
+            address(
+                new MockHealthCheck(address(tokenizedStrategy), address(asset))
+            )
         );
 
         healthCheck.setKeeper(keeper);

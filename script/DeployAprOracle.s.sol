@@ -13,7 +13,7 @@ contract DeployAprOracle is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         // Encode constructor arguments
-        bytes memory construct = abi.encode(0x33333333D5eFb92f19a5F94a43456b3cec2797AE);
+        bytes memory construct = abi.encode(vm.envAddress("GOVERNANCE"));
 
         // Get the bytecode
         bytes memory bytecode =  abi.encodePacked(vm.getCode("AprOracle.sol:AprOracle"), construct);

@@ -361,7 +361,7 @@ contract CommonTriggerTest is Setup {
         vault = setUpVault();
 
         bytes memory _calldata = abi.encodeWithSelector(
-            vault.process_report.selector,
+            vault.processReport.selector,
             address(mockStrategy)
         );
         bool response;
@@ -448,7 +448,7 @@ contract CommonTriggerTest is Setup {
 
         // Shutdown
         vm.prank(vaultManagement);
-        vault.shutdown_vault();
+        vault.shutdownVault();
         (response, data) = commonTrigger.vaultReportTrigger(
             address(vault),
             address(mockStrategy)

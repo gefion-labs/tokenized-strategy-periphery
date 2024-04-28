@@ -50,7 +50,12 @@ contract AuctionSwapperTest is Setup {
         super.setUp();
 
         swapper = IMockAuctionSwapper(
-            address(new MockAuctionSwapper(address(asset)))
+            address(
+                new MockAuctionSwapper(
+                    address(tokenizedStrategy),
+                    address(asset)
+                )
+            )
         );
 
         vm.label(address(auctionFactory), "Auction Factory ");

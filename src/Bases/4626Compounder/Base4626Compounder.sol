@@ -19,10 +19,11 @@ contract Base4626Compounder is BaseHealthCheck {
     IStrategy public immutable vault;
 
     constructor(
+        address _tokenizedStrategyAddress,
         address _asset,
         string memory _name,
         address _vault
-    ) BaseHealthCheck(_asset, _name) {
+    ) BaseHealthCheck(_tokenizedStrategyAddress, _asset, _name) {
         require(IStrategy(_vault).asset() == _asset, "wrong vault");
         vault = IStrategy(_vault);
 

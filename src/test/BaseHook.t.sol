@@ -12,7 +12,9 @@ contract BaseHookTest is Setup, HookEvents {
     function setUp() public override {
         super.setUp();
 
-        mockStrategy = IStrategy(address(new MockHooks(address(asset))));
+        mockStrategy = IStrategy(
+            address(new MockHooks(address(tokenizedStrategy), address(asset)))
+        );
 
         mockStrategy.setKeeper(keeper);
         mockStrategy.setPerformanceFeeRecipient(performanceFeeRecipient);

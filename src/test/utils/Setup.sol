@@ -12,6 +12,7 @@ import {VyperDeployer} from "./VyperDeployer.sol";
 import {Roles} from "@vaults/interfaces/Roles.sol";
 import {IVault} from "@vaults/interfaces/IVault.sol";
 import {IStrategy} from "@tokenized-strategy/interfaces/IStrategy.sol";
+import {TokenizedStrategy} from "@tokenized-strategy/TokenizedStrategy.sol";
 import {IVaultFactory} from "@vaults/interfaces/IVaultFactory.sol";
 
 import {MockStrategy} from "../mocks/MockStrategy.sol";
@@ -23,6 +24,7 @@ contract Setup is ExtendedTest, Clonable {
     VyperDeployer public vyperDeployer = new VyperDeployer();
 
     // Contract instances that we will use repeatedly.
+    TokenizedStrategy public tokenizedStrategy;
     ERC20 public asset;
     IStrategy public mockStrategy;
 
@@ -65,6 +67,9 @@ contract Setup is ExtendedTest, Clonable {
 
         vaultFactory = IVaultFactory(mockStrategy.FACTORY());
 
+        // Deploy the implementation for deterministic location
+        tokenizedStrategy = new TokenizedStrategy(address(vaultFactory));
+
         // label all the used addresses for traces
         vm.label(daddy, "daddy");
         vm.label(keeper, "keeper");
@@ -73,6 +78,7 @@ contract Setup is ExtendedTest, Clonable {
         vm.label(address(mockStrategy), "strategy");
         vm.label(vaultManagement, "vault management");
         vm.label(address(vaultFactory), " vault factory");
+        vm.label(address(tokenizedStrategy), " tokenized strategy");
         vm.label(performanceFeeRecipient, "performanceFeeRecipient");
     }
 
@@ -96,10 +102,10 @@ contract Setup is ExtendedTest, Clonable {
 
         vm.prank(management);
         // Give the vault manager all the roles
-        _vault.set_role(vaultManagement, Roles.ALL);
+        _vault.setRole(vaultManagement, Roles.ALL);
 
         vm.prank(vaultManagement);
-        _vault.set_deposit_limit(type(uint256).max);
+        _vault.setDepositLimit(type(uint256).max);
 
         return _vault;
     }
@@ -107,7 +113,9 @@ contract Setup is ExtendedTest, Clonable {
     function setUpStrategy() public returns (IStrategy) {
         // we save the strategy as a IStrategyInterface to give it the needed interface
         IStrategy _strategy = IStrategy(
-            address(new MockStrategy(address(asset)))
+            address(
+                new MockStrategy(address(tokenizedStrategy), address(asset))
+            )
         );
 
         // set keeper
@@ -146,13 +154,10 @@ contract Setup is ExtendedTest, Clonable {
 
     function addStrategyToVault(IVault _vault, IStrategy _strategy) public {
         vm.prank(vaultManagement);
-        _vault.add_strategy(address(_strategy));
+        _vault.addStrategy(address(_strategy));
 
         vm.prank(vaultManagement);
-        _vault.update_max_debt_for_strategy(
-            address(_strategy),
-            type(uint256).max
-        );
+        _vault.updateMaxDebtForStrategy(address(_strategy), type(uint256).max);
     }
 
     function addDebtToStrategy(
@@ -161,7 +166,7 @@ contract Setup is ExtendedTest, Clonable {
         uint256 _amount
     ) public {
         vm.prank(vaultManagement);
-        _vault.update_debt(address(_strategy), _amount);
+        _vault.updateDebt(address(_strategy), _amount);
     }
 
     function addStrategyAndDebt(
@@ -204,10 +209,10 @@ contract Setup is ExtendedTest, Clonable {
 
         // Need to make sure there is a protocol fee recipient to set the fee.
         vm.prank(gov);
-        vaultFactory.set_protocol_fee_recipient(gov);
+        vaultFactory.setProtocolFeeRecipient(gov);
 
         vm.prank(gov);
-        vaultFactory.set_protocol_fee_bps(_protocolFee);
+        vaultFactory.setProtocolFeeBps(_protocolFee);
 
         vm.prank(management);
         mockStrategy.setPerformanceFee(_performanceFee);
