@@ -6,7 +6,10 @@ import {BaseStrategy, ERC20} from "@tokenized-strategy/BaseStrategy.sol";
 contract MockStrategy is BaseStrategy {
     bool public tendStatus;
 
-    constructor(address _asset) BaseStrategy(_asset, "Mock Basic Strategy") {}
+    constructor(
+        address _tokenizedStrategyAddress,
+        address _asset
+    ) BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Basic Strategy") {}
 
     function _deployFunds(uint256) internal override {}
 

@@ -5,7 +5,10 @@ import {SolidlySwapper} from "../../swappers/SolidlySwapper.sol";
 import {BaseStrategy, ERC20} from "@tokenized-strategy/BaseStrategy.sol";
 
 contract MockSolidlySwapper is BaseStrategy, SolidlySwapper {
-    constructor(address _asset) BaseStrategy(_asset, "Mock Uni V3") {}
+    constructor(
+        address _tokenizedStrategyAddress,
+        address _asset
+    ) BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Uni V3") {}
 
     function _deployFunds(uint256) internal override {}
 
