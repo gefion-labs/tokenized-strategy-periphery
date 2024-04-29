@@ -40,8 +40,7 @@ contract AuctionSwapperTest is Setup {
     IMockAuctionSwapper public swapper;
 
     Auction public auction;
-    AuctionFactory public auctionFactory =
-        AuctionFactory(0x4A14145C4977E18c719BB70E6FcBF8fBFF6F62d2);
+    AuctionFactory public auctionFactory;
 
     uint256 public wantScaler;
     uint256 public fromScaler;
@@ -49,10 +48,13 @@ contract AuctionSwapperTest is Setup {
     function setUp() public override {
         super.setUp();
 
+        auctionFactory = new AuctionFactory();
+
         swapper = IMockAuctionSwapper(
             address(
                 new MockAuctionSwapper(
                     address(tokenizedStrategy),
+                    address(auctionFactory),
                     address(asset)
                 )
             )

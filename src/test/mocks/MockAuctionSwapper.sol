@@ -18,8 +18,12 @@ contract MockAuctionSwapper is BaseStrategy, AuctionSwapper {
 
     constructor(
         address _tokenizedStrategyAddress,
+        address _auctionFactory,
         address _asset
-    ) BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Uni V3") {}
+    )
+        BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Uni V3")
+        AuctionSwapper(_auctionFactory)
+    {}
 
     function _deployFunds(uint256) internal override {}
 
