@@ -6,9 +6,9 @@ import {BaseStrategy, ERC20} from "@tokenized-strategy/BaseStrategy.sol";
 
 contract MockUniswapV2Swapper is BaseStrategy, UniswapV2Swapper {
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _asset
-    ) BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Uni V3") {}
+    ) BaseStrategy(_tokenizedStrategy, _asset, "Mock Uni V3") {}
 
     function _deployFunds(uint256) internal override {}
 

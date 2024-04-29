@@ -17,11 +17,11 @@ contract MockAuctionSwapper is BaseStrategy, AuctionSwapper {
     uint256 public letKick;
 
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _auctionFactory,
         address _asset
     )
-        BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Uni V3")
+        BaseStrategy(_tokenizedStrategy, _asset, "Mock Uni V3")
         AuctionSwapper(_auctionFactory)
     {}
 

@@ -13,10 +13,10 @@ import {BaseHealthCheck, ERC20} from "../HealthCheck/BaseHealthCheck.sol";
  */
 abstract contract BaseHooks is BaseHealthCheck, Hooks {
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _asset,
         string memory _name
-    ) BaseHealthCheck(_tokenizedStrategyAddress, _asset, _name) {}
+    ) BaseHealthCheck(_tokenizedStrategy, _asset, _name) {}
 
     // Deposit
     function deposit(

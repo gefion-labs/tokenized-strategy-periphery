@@ -7,9 +7,9 @@ contract MockStrategy is BaseStrategy {
     bool public tendStatus;
 
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _asset
-    ) BaseStrategy(_tokenizedStrategyAddress, _asset, "Mock Basic Strategy") {}
+    ) BaseStrategy(_tokenizedStrategy, _asset, "Mock Basic Strategy") {}
 
     function _deployFunds(uint256) internal override {}
 

@@ -7,9 +7,9 @@ contract MockHealthCheck is BaseHealthCheck {
     bool public healthy = true;
 
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _asset
-    ) BaseHealthCheck(_tokenizedStrategyAddress, _asset, "Mock Health Check") {}
+    ) BaseHealthCheck(_tokenizedStrategy, _asset, "Mock Health Check") {}
 
     function _deployFunds(uint256) internal override {}
 

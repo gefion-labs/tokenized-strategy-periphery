@@ -36,10 +36,10 @@ abstract contract BaseHealthCheck is BaseStrategy {
     uint16 private _lossLimitRatio;
 
     constructor(
-        address _tokenizedStrategyAddress,
+        address _tokenizedStrategy,
         address _asset,
         string memory _name
-    ) BaseStrategy(_tokenizedStrategyAddress, _asset, _name) {}
+    ) BaseStrategy(_tokenizedStrategy, _asset, _name) {}
 
     /**
      * @notice Returns the current profit limit ratio.
