@@ -273,7 +273,7 @@ contract CommonTriggerTest is Setup {
         assertEq(commonTrigger.baseFeeProvider(), baseFeeProvider);
 
         // Set base fee.
-        uint256 currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        uint256 currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase * 2);
 
@@ -304,7 +304,7 @@ contract CommonTriggerTest is Setup {
 
         // base fee not acceptable
         // lower acceptable base fee.
-        currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase / 2);
 
@@ -314,7 +314,7 @@ contract CommonTriggerTest is Setup {
         assertEq(response, false);
         assertEq(data, bytes("Base Fee"));
 
-        currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase * 2);
 
@@ -373,7 +373,7 @@ contract CommonTriggerTest is Setup {
         assertEq(commonTrigger.baseFeeProvider(), baseFeeProvider);
 
         // Set base fee.
-        uint256 currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        uint256 currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase * 2);
 
@@ -404,7 +404,7 @@ contract CommonTriggerTest is Setup {
         assertEq(data, _calldata);
 
         // lower acceptable base fee.
-        currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase / 2);
 
@@ -416,7 +416,7 @@ contract CommonTriggerTest is Setup {
         assertEq(data, bytes("Base Fee"));
 
         // Reset it
-        currentBase = IBaseFee(baseFeeProvider).basefee_global();
+        currentBase = IBaseFee(baseFeeProvider).basefeeGlobal();
         vm.prank(daddy);
         commonTrigger.setAcceptableBaseFee(currentBase * 2);
 

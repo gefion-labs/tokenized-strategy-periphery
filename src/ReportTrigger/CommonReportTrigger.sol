@@ -20,7 +20,7 @@ interface ICustomVaultTrigger {
 }
 
 interface IBaseFee {
-    function basefee_global() external view returns (uint256);
+    function basefeeGlobal() external view returns (uint256);
 }
 
 /**
@@ -287,7 +287,7 @@ contract CommonReportTrigger is Governance {
 
             // Don't report if the base fee is to high.
             if (
-                IBaseFee(_baseFeeProvider).basefee_global() > _acceptableBaseFee
+                IBaseFee(_baseFeeProvider).basefeeGlobal() > _acceptableBaseFee
             ) return (false, bytes("Base Fee"));
         }
 
@@ -378,7 +378,7 @@ contract CommonReportTrigger is Governance {
 
             // Don't report if the base fee is to high.
             if (
-                IBaseFee(_baseFeeProvider).basefee_global() > _acceptableBaseFee
+                IBaseFee(_baseFeeProvider).basefeeGlobal() > _acceptableBaseFee
             ) return (false, bytes("Base Fee"));
         }
 
@@ -418,7 +418,7 @@ contract CommonReportTrigger is Governance {
         address _baseFeeProvider = baseFeeProvider;
         if (_baseFeeProvider == address(0)) return 0;
 
-        return IBaseFee(_baseFeeProvider).basefee_global();
+        return IBaseFee(_baseFeeProvider).basefeeGlobal();
     }
 
     /**
@@ -436,7 +436,7 @@ contract CommonReportTrigger is Governance {
         // If no provider is set return true.
         if (_baseFeeProvider == address(0)) return true;
 
-        return IBaseFee(baseFeeProvider).basefee_global() <= acceptableBaseFee;
+        return IBaseFee(baseFeeProvider).basefeeGlobal() <= acceptableBaseFee;
     }
 
     /*//////////////////////////////////////////////////////////////
