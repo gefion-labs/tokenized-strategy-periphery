@@ -84,7 +84,6 @@ contract UniswapV3Swapper {
                         _to, // tokenOut
                         uniFees[_from][_to], // from-to fee
                         address(this), // recipient
-                        block.timestamp, // deadline
                         _amountIn, // amountIn
                         _minAmountOut, // amountOut
                         0 // sqrtPriceLimitX96
@@ -104,7 +103,6 @@ contract UniswapV3Swapper {
                     ISwapRouter.ExactInputParams(
                         path,
                         address(this),
-                        block.timestamp,
                         _amountIn,
                         _minAmountOut
                     )
@@ -147,7 +145,6 @@ contract UniswapV3Swapper {
                         _to, // tokenOut
                         uniFees[_from][_to], // from-to fee
                         address(this), // recipient
-                        block.timestamp, // deadline
                         _amountTo, // amountOut
                         _maxAmountFrom, // maxAmountIn
                         0 // sqrtPriceLimitX96
@@ -167,7 +164,6 @@ contract UniswapV3Swapper {
                     ISwapRouter.ExactOutputParams(
                         path,
                         address(this),
-                        block.timestamp,
                         _amountTo, // How much we want out
                         _maxAmountFrom
                     )
