@@ -60,6 +60,43 @@ contract UniswapV2Swapper {
         }
     }
 
+    /**
+     * @dev Used to swap a specific amount of `_to` from `_from` unless
+     * it takes more than `_maxAmountFrom`.
+     *
+     * This will check and handle all allowances as well as not swapping
+     * unless `_maxAmountFrom` is greater than the set `minAmountToSell`
+     *
+     * If one of the tokens matches with the `base` token it will do only
+     * one jump, otherwise will do two jumps.
+     *
+     * The corresponding uniFees for each token pair will need to be set
+     * other wise this function will revert.
+     *
+     * @param _from The token we are swapping from.
+     * @param _to The token we are swapping to.
+     * @param _amountTo The amount of `_to` we need out.
+     * @param _maxAmountFrom The max of `_from` we will swap.
+     */
+    function _swapTo(
+        address _from,
+        address _to,
+        uint256 _amountTo,
+        uint256 _maxAmountFrom
+    ) internal virtual {
+        if (_maxAmountFrom > minAmountToSell) {
+            _checkAllowance(router, _from, _maxAmountFrom);
+
+            IUniswapV2Router02(router).swapTokensForExactTokens(
+                _amountTo,
+                _maxAmountFrom,
+                _getTokenOutPath(_from, _to),
+                address(this),
+                block.timestamp
+            );
+        }
+    }
+
     /**\
      * @dev Internal function to get a quoted amount out of token sale.
      *
