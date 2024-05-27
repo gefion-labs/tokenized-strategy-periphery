@@ -10,7 +10,7 @@ import {IThenaRouter01} from "../interfaces/Thena/IThenaRouter01.sol";
  *   @title ThenaSwapper
  *   @author gefion.finance
  *   @dev This is a simple contract that can be inherited by any tokenized
- *   strategy that would like to use Uniswap V2 for swaps. It holds all needed
+ *   strategy that would like to use Thena for swaps. It holds all needed
  *   logic to perform exact input swaps.
  *
  *   The global address variables default to the ETH mainnet addresses but
@@ -25,7 +25,7 @@ contract ThenaSwapper {
     // Defaults to WETH on mainnet.
     address public base = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
-    // Defaults to Uniswap V2 router on mainnet.
+    // Defaults to Thena router on mainnet.
     address public router = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
 
     /**
