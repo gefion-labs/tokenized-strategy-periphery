@@ -7,7 +7,7 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 import {IThenaRouter01} from "../interfaces/Thena/IThenaRouter01.sol";
 
 /**
- *   @title UniswapV2Swapper
+ *   @title ThenaSwapper
  *   @author gefion.finance
  *   @dev This is a simple contract that can be inherited by any tokenized
  *   strategy that would like to use Uniswap V2 for swaps. It holds all needed
@@ -17,7 +17,7 @@ import {IThenaRouter01} from "../interfaces/Thena/IThenaRouter01.sol";
  *   remain settable by the inheriting contract to allow for customization
  *   based on needs or chain its used on.
  */
-contract UniswapV2Swapper {
+contract ThenaSwapper {
     using SafeERC20 for ERC20;
 
     // Optional Variable to be set to not sell dust.
