@@ -22,11 +22,11 @@ contract ThenaSwapper {
 
     // Optional Variable to be set to not sell dust.
     uint256 public minAmountToSell;
-    // Defaults to WETH on mainnet.
-    address public base = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    // Defaults to WBNB on bsc mainnet.
+    address public base = 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c;
 
-    // Defaults to Thena router on mainnet.
-    address public router = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
+    // Defaults to Thena router on bsc mainnet.
+    address public router = 0xd4ae6eCA985340Dd434D38F470aCCce4DC78D109;
 
     /**
      * @dev Used to swap a specific amount of `_from` to `_to`.
